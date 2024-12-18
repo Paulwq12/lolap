@@ -40,7 +40,8 @@ function startBot() {
     ensurePermissions();
 
     const mainFile = path.join(__dirname, 'main.js');
-    let args = [mainFile, ...process.argv.slice(2)];
+    const maxHeapSize = process.env.MAX_HEAP_SIZE || '9000'; // Default to 4 GB heap size
+     const args = [`--max-old-space-size=${maxHeapSize}`, mainFile, ...process.argv.slice(2)];
 
     console.log(`Starting Bot with: ${['node', ...args].join(' ')}`);
 
